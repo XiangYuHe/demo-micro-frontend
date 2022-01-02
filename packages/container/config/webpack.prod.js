@@ -10,6 +10,8 @@ const prodConfig = {
     mode: 'production',
     output: {
         filename: '[name].[contenthash].js',
+        // Refer to a file that is build by webpack
+        publicPath: '/container/latest/',
     },
     plugins: [
         new ModuleFederationPlugin({
