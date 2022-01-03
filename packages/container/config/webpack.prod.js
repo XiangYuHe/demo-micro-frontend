@@ -18,7 +18,7 @@ const prodConfig = {
             name: 'container', // Do no need to put a name for container (not required for host)
             remotes: {
                 // Assume the remote entry file is nested in the folder
-                marketing: `marketing@${domain}/marketing/remoteEntry.js`,
+                marketing: `marketing@${domain}/marketing/latest/remoteEntry.js`,
             },
             shared: packageJson.dependencies,
         }),
