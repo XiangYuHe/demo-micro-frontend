@@ -10,12 +10,12 @@ const packageJson = require('../package.json');
 const devConfig = {
     mode: 'development',
     output: {
-        publicPath: 'http://localhost:8081/'
+        publicPath: 'http://localhost:8082/'
     },
     devServer: {
-        port: 8081,
-        historyApiFallback: {
-            index: 'index.html',
+        port: 8082,
+        historyApiFallback: { // Or true
+            index: '/index.html',
         },
     },
     plugins: [
@@ -23,10 +23,10 @@ const devConfig = {
             template: './public/index.html',
         }),
         new ModuleFederationPlugin({
-            name: 'marketing',
+            name: 'auth',
             filename: 'remoteEntry.js',
             exposes: {
-                './MarketingApp': './src/bootstrap' // Naming beaware
+                './AuthApp': './src/bootstrap' // Naming beaware
             },
             // shared: ['react', 'react-dom'],
             shared: packageJson.dependencies, // Only if don't want to specific

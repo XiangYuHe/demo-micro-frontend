@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -66,9 +66,12 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 export default function Album() {
   const classes = useStyles();
 
+  const [test, setTest] = useState('cookies');
+
   return (
     <React.Fragment>
       <main>
+        <div>{test}</div>
         {/* Hero unit */}
         <div className={classes.heroContent}>
           <Container maxWidth="sm">

@@ -14,3 +14,4 @@ CSS coming from a component library
 
 Assumption in production only, we might wnt to extract this generated CSS selector + rule into a separate CSS stylesheet; generated CSS as small as possible (space saving technique)
 - Issue with same CSS-in-JS library for same not really random selectors
+- Double check for class-name generation (or customization of class name)
