@@ -1,4 +1,5 @@
 const { merge } = require('webpack-merge');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 
 const commonConfig = require('./webpack.common');
@@ -9,23 +10,27 @@ const packageJson = require('../package.json');
 const devConfig = {
     mode: 'development',
     output: {
-        publicPath: 'http://localhost:8080/'
+        publicPath: 'http://localhost:8083/'
     },
     devServer: {
-        port: 8080,
-        historyApiFallback: {
-            index: '/index.html', // Interesting that we need development mode to point to /index.html
+        port: 8083,
+        historyApiFallback: { // Or true
+            index: '/index.html',
         },
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        }
     },
     plugins: [
+        new HtmlWebpackPlugin({
+            template: './public/index.html',
+        }),
         new ModuleFederationPlugin({
-            name: 'container', // Name for host is being used convention
-            remotes: {
-                marketing: 'marketing@http://localhost:8081/remoteEntry.js',
-                auth: 'auth@http://localhost:8082/remoteEntry.js',
-                dashboard: 'dashboard@http://localhost:8083/remoteEntry.js',
+            name: 'dashboard',
+            filename: 'remoteEntry.js',
+            exposes: {
+                './DashboardApp': './src/bootstrap' // Naming beaware
             },
-            // shared: ['react', 'react-dom'],
             shared: packageJson.dependencies, // Only if don't want to specific
         }),
     ],
