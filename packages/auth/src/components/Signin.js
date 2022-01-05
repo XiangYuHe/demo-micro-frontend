@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn({ onSignIn }) {
   const classes = useStyles();
+  console.log('component signin'); // Check rendering
 
   return (
     <Container component="main" maxWidth="xs">

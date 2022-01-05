@@ -141,6 +141,7 @@ const footers = [
 
 export default function Pricing() {
   const classes = useStyles();
+  console.log('component pricing'); // Check rendering
 
   return (
     <React.Fragment>

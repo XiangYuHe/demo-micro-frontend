@@ -1,5 +1,6 @@
 import { mount } from 'auth/AuthApp';
 import React, { useRef, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import { useHistory } from 'react-router-dom';
 
 export default ({ onSignIn }) => {
@@ -7,6 +8,8 @@ export default ({ onSignIn }) => {
     const history = useHistory();
 
     useEffect(() => {
+        let current = ref.current;
+        
         const { onParentNavigate } = mount(ref.current, {
             initialPath: history.location.pathname,
             onNavigate: ({ pathname: nextPathname }) => { //location obj have information about history
@@ -22,6 +25,10 @@ export default ({ onSignIn }) => {
         });
 
         history.listen(onParentNavigate);
+
+        return () => {
+            ReactDOM.unmountComponentAtNode(current);
+        }
 
     }, []);
 

@@ -1,5 +1,6 @@
 import { mount } from 'marketing/MarketingApp';
 import React, { useRef, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import { useHistory } from 'react-router-dom';
 
 export default () => {
@@ -7,6 +8,8 @@ export default () => {
     const history = useHistory();
 
     useEffect(() => {
+        let current = ref.current;
+
         const { onParentNavigate } = mount(ref.current, {
             initialPath: history.location.pathname,
             onNavigate: ({ pathname: nextPathname }) => { //location obj have information about history
@@ -21,6 +24,10 @@ export default () => {
         });
 
         history.listen(onParentNavigate);
+
+        return () => {
+            ReactDOM.unmountComponentAtNode(current);
+        }
 
     }, []);
 
